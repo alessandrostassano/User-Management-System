@@ -12,6 +12,7 @@
         <th>id</th>
         <th>nome</th>
         <th>cognome</th>
+        <th>email</th>
         <th>data di nascita</th>
         <th>password</th>
         <th width="1%" >action</th>
@@ -21,6 +22,7 @@
         <td width="1%"><?= $user->getUserId() ?></td>
         <td><?= $user->getFirstName()?></td>
         <td ><?= $user->getLastName() ?></td>
+        <td ><?= $user->getEmail() ?></td>
         <td ><?= $user->getBirthday() ?></td>
         <td ><?= $user->getPassword() ?></td>
         <td class="text-nowrap">

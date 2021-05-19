@@ -1,5 +1,5 @@
 <?php 
-use sarassoroberto\usm\entity\User;
+
 use sarassoroberto\usm\model\UserModel;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\LoginValidation;
@@ -18,34 +18,20 @@ if($_SERVER['REQUEST_METHOD']==='GET'){
     list($password,$passwordClass,$passwordClassMessage,$passwordMessage) = ValidationFormHelper::getDefault();
 }
 
-if($_SERVER['REQUEST_METHOD']==='POST'){
+if ($_SERVER['REQUEST_METHOD']==='POST') {
+    $email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
+    if($email && $password){
+        $user = (new UserModel())->autenticate($email,$password);
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $val = new LoginValidation($email, $password);
-    $emailValidation = $val -> getError('email');
-    $passwordValidation = $val -> getError('password');
-
-
-    
-    list($email,$emailClass,$emailClassMessage,$emailMessage) = ValidationFormHelper::getValidationClass($email);
-    list($password,$passwordClass,$passwordClassMessage,$passwordMessage) = ValidationFormHelper::getValidationClass($password);
-  
-
-
-    
-
+        if(is_null($user)){ $msg = "credenziali errate"; }else{
+            header("location: list_users.php");
+        }
+    }else{
+        $msg = "compila i campi in modo corretto";
+    }
+//password hash funziona che compila la password
+//password verify la funzione che la controlla
 }
-
-
-
-
-
-
-
-
-
-
 
 include'./src/view/login_user_view.php';
