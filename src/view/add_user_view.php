@@ -58,7 +58,7 @@
                <label for="">Password</label>
                <!-- is-invalid  -->
                <input
-                value="<?= $password?>" 
+                value="<?= $password ?>" 
                 class="form-control <?= $passwordClass ?>"  
                 name="lastName"  
                 type="text">

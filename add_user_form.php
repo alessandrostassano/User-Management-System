@@ -23,6 +23,7 @@ if($_SERVER['REQUEST_METHOD']==='GET'){
 if ($_SERVER['REQUEST_METHOD']==='POST') {
 
     $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday'], $_POST['password']);
+    print_r($_POST['password']);
     $val = new UserValidation($user);
     $firstNameValidation = $val->getError('firstName');
     $lastNameValidation = $val->getError('lastName');
