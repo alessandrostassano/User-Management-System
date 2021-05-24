@@ -10,11 +10,11 @@
 
       <?php endif ?>
 
-        <!-- <form action="add_user_form.php" method="POST"> -->
+        
         <form class="mt-4" action="<?= $action ?>" method="POST">
             <div class="form-group">
                <label for="">Nome</label>
-               <!-- is-invalid  -->
+               
                <input value="<?= $firstName ?>" 
                       class="form-control <?= $firstNameClass ?>"  
                       name="firstName"  
@@ -72,8 +72,7 @@
              <?php endif ?>
 
              <?php if(isset($userId)) { ?>
-            <!-- quando gli utenti vengono creati non hanno ancora un id, quindi non ha bisogno del campo nascosto -->
-               <!-- invece quando sono in modifica di un utente -->
+          
                <div class="form-group mt-4 p-4 border border-danger">
                <label class="text-danger">
                   Questo campo è visibile motivi didattici in realtà dovrebbe essere un <b>input[type=hidden]</b> <br> 
