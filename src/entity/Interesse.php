@@ -7,10 +7,8 @@ class Interesse {
     private $interesseId;
     private $nome;
 
-    public function __construct($interesseId, $nome) {
-        $this->interesseId = $interesseId;
+    public function __construct($nome) {
         $this->nome = $nome;
-
     }
 
     public function getInteresseId()
