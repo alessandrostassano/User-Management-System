@@ -33,7 +33,6 @@ public function create(Interesse $interesse)
         $pdostm = $this->conn->prepare('INSERT INTO Interesse (nome)
         VALUES (:nome);');
 
-        $pdostm->bindValue(':InteresseId', $interesse->getInteresseId(), PDO::PARAM_STR);
         $pdostm->bindValue(':nome', $interesse->getNome(), PDO::PARAM_STR);
 
         $pdostm->execute();
