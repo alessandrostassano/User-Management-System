@@ -27,26 +27,19 @@ class InteresseModel
 
 
 // CRUD
-public function create(User $user)
+public function create(Interesse $interesse)
 {
     try {
-        $pdostm = $this->conn->prepare('INSERT INTO User (firstName,lastName,email,birthday,password)
-        VALUES (:firstName,:lastName,:email,:birthday,:password);');
+        $pdostm = $this->conn->prepare('INSERT INTO Interesse (nome)
+        VALUES (:nome);');
 
-        $pdostm->bindValue(':firstName', $user->getFirstName(), PDO::PARAM_STR);
-        $pdostm->bindValue(':lastName', $user->getLastName(), PDO::PARAM_STR);
-        $pdostm->bindValue(':email', $user->getEmail(), PDO::PARAM_STR);
-        $pdostm->bindValue(':birthday', $user->getBirthday(), PDO::PARAM_STR);
-        $pdostm->bindValue(':password', password_hash($user->getPassword(), PASSWORD_ARGON2I), PDO::PARAM_STR);
+        $pdostm->bindValue(':InteresseId', $interesse->getInteresseId(), PDO::PARAM_STR);
+        $pdostm->bindValue(':nome', $interesse->getNome(), PDO::PARAM_STR);
 
         $pdostm->execute();
 
-        // Come ottenere id di un utente appena creato
-        // perchè devo inserire id dell'utente nella tabella n:n
-        // User_Interesse  
-
     } catch (\PDOException $e) {
-        // TODO: Evitare echo
+        
         throw $e;
     }
 }
