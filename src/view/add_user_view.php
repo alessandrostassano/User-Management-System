@@ -42,7 +42,7 @@
          <label for="">interessi</label>
          <div class="checkbox">
             <div class="checkbox">
-               <label><input type="checkbox" value="" name='interessi'>MATTEO CARIDDI E SLAVATORE</label>
+               <label><input type="checkbox" value="" name='interessi'> <=? ?> </label>
             </div>
          </div>
       </div>
