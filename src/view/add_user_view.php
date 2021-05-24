@@ -40,25 +40,22 @@ include './src/view/head.php' ?>
             <?= $emailMessage ?>
          </div>
       </div>
-
-      
-      <pre>
+     <pre>
       </pre>
-
-      <?php 
-      $interesseModel = new InteresseModel();
-      foreach($interesseModel->readAll() as $interesse ){ ?>
-      <label for="">interessi</label>   
-      <pre></pre>
+    <label for="">interessi</label>
         <div class="form-group">
          <div class="checkbox">
             <div class="checkbox">
-               <label><input type="checkbox" value="" name='interessi'> <?= $interesse->getNome() ?> </label>
-            </div>
+      <?php 
+      $interesseModel = new InteresseModel();
+      
+      foreach($interesseModel->readAll() as $interesse ){ ?>  
+      <label><input type="checkbox" value="" name='interessi'> <?= $interesse->getNome() ?> </label>
+      <?php } ?>
+
+        </div>
          </div>
       </div> 
-      <?php } ?>
-      
       
 
          <pre>
