@@ -11,7 +11,7 @@ require "../../vendor/testTools/testTool.php";
 
 $us = new UserSession();
 
-$user = $us->autenticate('luigi.russo@email.com','Luigi');
+$user = $us->logOut();
 
 print_r($_SESSION);
 

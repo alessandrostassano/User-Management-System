@@ -1,11 +1,12 @@
-<?php include './src/view/head.php'?> 
-<?php include './src/view/header.php'?>
-
+<?php include './src/view/head.php' ?> 
+<?php include './src/view/header.php' ?>
 
 
 <div class="container">
 <div class="border p-3 my-3">
 <a class="btn btn-primary" href="./add_user_form.php">add new user</a>
+<a class="btn btn-primary" href="./logout.php">logout</a>
+
 </div>
 <table class="table">
     <tr>
@@ -14,7 +15,6 @@
         <th>cognome</th>
         <th>email</th>
         <th>data di nascita</th>
-        <th>password</th>
         <th width="1%" >action</th>
     </tr>
     <?php foreach($model->readAll() as $user ){ ?>
@@ -24,7 +24,6 @@
         <td ><?= $user->getLastName() ?></td>
         <td ><?= $user->getEmail() ?></td>
         <td ><?= $user->getBirthday() ?></td>
-        <td ><?= $user->getPassword() ?></td>
         <td class="text-nowrap">
         <a href="edit_user.php?user_id=<?= $user->getUserId() ?>" class="btn btn-secondary">edit </a>
         <a href="delete_user.php?user_id=<?= $user->getUserId() ?>" class="btn btn-danger">delete </a>

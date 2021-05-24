@@ -7,6 +7,9 @@ class UserValidation {
 
     public const FIRST_NAME_ERROR_NONE_MSG = 'Il nome è ggiusto !!';
     public const FIRST_NAME_ERROR_REQUIRED_MSG = 'Il nome è obbligatorio';
+    
+    public const PASSWORD_ERROR_NONE_MSG = '';
+    public const PASSWORD_ERROR_REQUIRED_MSG = 'Password è obbligatoria';
 
     public const LAST_NAME_ERROR_NONE_MSG = 'Il cognome è ggiusto !!';
     public const LAST_NAME_ERROR_REQUIRED_MSG = 'Il cognome è obbligatorio';
@@ -19,14 +22,11 @@ class UserValidation {
     public const EMAIL_ERROR_REQUIRED_MSG = 'La mail è obbligatoria';
     public const EMAIL_ERROR_NONE_MSG = 'Il formato della email è corretto';
 
-    public const PASSWORD_ERROR_NONE_MSG = 'La password è stata inserita !!';
-    public const PASSWORD_ERROR_REQUIRED_MSG = 'La password è obbligatoria';
-
     private $user;
-    private $errors = [] ;
+    private $errors = [] ;// Array<ValidationResult>;
     private $isValid = true;
-    public $firstNameResult;
 
+    public $firstNameResult;
 
     public function __construct(User $user) {
         $this->user = $user;
@@ -76,6 +76,18 @@ class UserValidation {
         return $validationResult;
     }
 
+    private function validatePassword():?ValidationResult
+    {
+        $password = trim($this->user->getPassword());
+
+        if(empty($password) && empty($this->user->getUserId())){
+            $validationResult = new ValidationResult(self::PASSWORD_ERROR_REQUIRED_MSG,false,$password);
+        } else {
+            $validationResult = new ValidationResult(self::PASSWORD_ERROR_NONE_MSG,true,$password);
+        };
+        return $validationResult;
+    }
+
     private function validateBirthday():?ValidationResult
     {
         $date = trim($this->user->getBirthday());
@@ -111,18 +123,6 @@ class UserValidation {
             }
             
         } 
-    }
-
-    private function validatePassword():?ValidationResult
-    {
-        $password = trim($this->user->getPassword());
-
-        if(empty($password)){
-            $validationResult = new ValidationResult(self::PASSWORD_ERROR_REQUIRED_MSG,false,$password);
-        } else {
-            $validationResult = new ValidationResult(self::PASSWORD_ERROR_NONE_MSG,true,$password);
-        };
-        return $validationResult;
     }
 
     /**

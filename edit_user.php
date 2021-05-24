@@ -1,5 +1,6 @@
 <?php 
 use sarassoroberto\usm\entity\User;
+use sarassoroberto\usm\factory\UserFactory;
 use sarassoroberto\usm\model\UserModel;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
@@ -8,7 +9,7 @@ require "./__autoload.php";
 
 /** $action rappresentà l'indirizzo a cui verranno inviati i dati del form */
 $action = './edit_user.php';
-$submit = 'salva modifiche';
+$submit = 'sava modifiche';
 
 if($_SERVER['REQUEST_METHOD']==='GET'){
 
@@ -22,13 +23,16 @@ if($_SERVER['REQUEST_METHOD']==='GET'){
     list($lastName,$lastNameClass,$lastNameClassMessage,$lastNameMessage) = ValidationFormHelper::getDefault($user->getLastName());
     list($email,$emailClass,$emailClassMessage,$emailMessage) = ValidationFormHelper::getDefault($user->getEmail());
     list($birthday,$birthdayClass,$birthdayClassMessage,$birthdayMessage) = ValidationFormHelper::getDefault($user->getBirthday());    
-    list($password,$passwordClass,$passwordClassMessage,$passwordMessage) = ValidationFormHelper::getDefault($user->getPassword());
+    
+    
+  
 }
 
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     
     $userId = filter_input(INPUT_POST,'userId',FILTER_SANITIZE_NUMBER_INT);
-    $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday'], $_POST['password']);
+    // $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday']);
+    $user = UserFactory::fromArray($_POST);
     // Imposto anche l'id che deve corrispondere a quello dell'utente che sto modificando
     $user->setUserId($userId);
 
@@ -40,14 +44,12 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $lastNameValidation = $val->getError('lastName');
     $emailValidation = $val->getError('email');
     $birthdayValidation = $val->getError('birthday');
-    $passwordValidation = $val->getError('password');
    
 
     list($firstName, $firstNameClass, $firstNameClassMessage, $firstNameMessage) = ValidationFormHelper::getValidationClass($firstNameValidation);
     list($lastName, $lastNameClass, $lastNameClassMessage, $lastNameMessage) = ValidationFormHelper::getValidationClass($lastNameValidation);
     list($email, $emailClass, $emailClassMessage, $emailMessage) = ValidationFormHelper::getValidationClass($emailValidation);
     list($birthday, $birthdayClass, $birthdayClassMessage, $birthdayMessage) = ValidationFormHelper::getValidationClass($birthdayValidation);
-    list($password,$passwordClass,$passwordClassMessage,$passwordMessage) = ValidationFormHelper::getValidationClass($passwordValidation);
     $user->setBirthday($birthday);
 
     if ($val->getIsValid()) {
