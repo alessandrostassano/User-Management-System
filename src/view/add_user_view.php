@@ -1,4 +1,8 @@
-<?php include './src/view/head.php' ?>
+<?php
+
+use sarassoroberto\usm\model\InteresseModel;
+
+include './src/view/head.php' ?>
 <?php include './src/view/header.php' ?>
 
 <div class="container">
@@ -37,17 +41,28 @@
          </div>
       </div>
 
+      
+      <pre>
+      </pre>
 
-      <div class="form-group">
-         <label for="">interessi</label>
+      <?php 
+      $interesseModel = new InteresseModel();
+      foreach($interesseModel->readAll() as $interesse ){ ?>
+      <label for="">interessi</label>   
+      <pre></pre>
+        <div class="form-group">
          <div class="checkbox">
             <div class="checkbox">
-               <label><input type="checkbox" value="" name='interessi'> <=? ?> </label>
+               <label><input type="checkbox" value="" name='interessi'> <?= $interesse->getNome() ?> </label>
             </div>
          </div>
-      </div>
+      </div> 
+      <?php } ?>
+      
+      
 
-
+         <pre>
+         </pre>
 
       <div class="form-group">
          <label for="">data di nascita</label>
@@ -89,3 +104,4 @@
 </body>
 
 </html>
+
