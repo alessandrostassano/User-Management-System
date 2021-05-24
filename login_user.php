@@ -21,17 +21,13 @@ if($_SERVER['REQUEST_METHOD']==='GET'){
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     $email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
-    if($email && $password){
+  
         $user = (new UserModel())->autenticate($email,$password);
-
+        print_r($user);
         if(is_null($user)){ $msg = "credenziali errate"; }else{
             header("location: list_users.php");
         }
-    }else{
-        $msg = "compila i campi in modo corretto";
-    }
-//password hash funziona che compila la password
-//password verify la funzione che la controlla
+
 }
 
 include'./src/view/login_user_view.php';

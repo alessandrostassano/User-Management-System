@@ -166,8 +166,23 @@ public function findByEmail(string $email):?User
     }
 }
 
+public function autenticate($email,$password) {
 
-public function autenticate(string $email,string $password):?User
+    //chiamata al Database con la var sql
+    $sql = "SELECT * FROM user where email=:email and password=:password";
+    $pdostm = $this->conn->prepare($sql);
+    $pdostm->bindValue('email', $email, PDO::PARAM_STR );
+    $pdostm->bindValue('password', $password, PDO::PARAM_STR );
+    $pdostm->execute();
+    $result = $pdostm -> fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,User::class,['','','','','']);
+
+    //fetch all crea nella variabile result un array di utente con 5 parametri 
+    //sotto controllo 
+    return count($result)===0 ? null:$result[0];
+}
+
+
+/*public function autenticate(string $email,string $password):?User
     {
         $user = $this->findByEmail($email);
         if(!is_null($user)) {
@@ -175,7 +190,7 @@ public function autenticate(string $email,string $password):?User
             return password_verify($password,$passwordHash) ? $user : null;
         }
         return null;
-    }
+    }*/
 
 
       

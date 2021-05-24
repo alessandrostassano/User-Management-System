@@ -60,7 +60,7 @@
                <input
                 value="<?= $password ?>" 
                 class="form-control <?= $passwordClass ?>"  
-                name="lastName"  
+                name="password"  
                 type="text">
                <div class="<?= $passwordClassMessage ?>">
                   <?= $passwordMessage ?>
