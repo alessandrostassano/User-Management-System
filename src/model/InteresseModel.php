@@ -4,6 +4,7 @@ namespace sarassoroberto\usm\model;
 
 use \PDO;
 use sarassoroberto\usm\config\local\AppConfig;
+use sarassoroberto\usm\entity\Interesse;
 use sarassoroberto\usm\entity\User;
 
 
@@ -52,11 +53,9 @@ public function create(User $user)
 
 public function readAll()
     {
-        $pdostm = $this->conn->prepare('SELECT * FROM User;');
+        $pdostm = $this->conn->prepare('SELECT * FROM Interesse;');
         $pdostm->execute();
-        //$result = $pdostm->fetchAll();
-        // $user = array_map('Userfactory::fromArray',$result);
-        return $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, User::class, ['','','','','']);
+        return $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, Interesse::class, ['','']);
     }
 
     public function readOne($user_id)
