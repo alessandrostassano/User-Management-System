@@ -11,7 +11,7 @@ require "./__autoload.php";
 /** $action rappresentà l'indirizzo a cui verranno inviati i dati del form */
 $action = './add_user_form.php';
 $submit = 'aggiungi nuovo utente';
-$aggiungiInteresse = 'aggiungi interesse';
+
 
 if($_SERVER['REQUEST_METHOD']==='GET'){
     

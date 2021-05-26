@@ -43,6 +43,22 @@ public function create(Interesse $interesse)
     }
 }
 
+public function AddInterest(int $interesseId, int $user_Id)
+{
+    try {
+        $pdostm = $this->conn->prepare('INSERT INTO user_interesse (InteresseId, UserId)
+        VALUES (:interesseId, :user_Id);');
+
+        $pdostm->bindValue(':interesseId', $interesseId, PDO::PARAM_STR);
+        $pdostm->bindValue(':user_Id', $user_Id, PDO::PARAM_STR);
+        $pdostm->execute();
+
+    } catch (\PDOException $e) {
+        
+        throw $e;
+    }
+}
+
 public function readAll()
     {
         $pdostm = $this->conn->prepare('SELECT * FROM Interesse;');
