@@ -96,12 +96,12 @@ public function readAll()
         }
     }
 
-    public function delete(int $user_id):bool
+    public function delete(int $interesseId):bool
     {
-        $sql = "delete from User where userId=:user_id ";
+        $sql = "delete from Interesse where InteresseId=:interesseId ";
         
         $pdostm = $this->conn->prepare($sql);
-        $pdostm->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $pdostm->bindValue(':InteresseId', $interesseId, PDO::PARAM_INT);
         $pdostm->execute();
 
         
