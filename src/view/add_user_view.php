@@ -96,6 +96,7 @@ include './src/view/head.php' ?>
       <?php } ?>
 
       <button class="btn btn-primary mt-3" type="submit"><?= $submit ?></button>
+      <a class="btn btn-primary mt-3" href="./aggiungi_interesse_form.php"><?= $aggiungiInteresse ?></a>
    </form>
 </div>
 
